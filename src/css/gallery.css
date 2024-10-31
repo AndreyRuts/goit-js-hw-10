@@ -1,0 +1,21 @@
+.gallery{
+    margin: 0 auto;
+    max-width: 1182px;
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 24px; */
+    margin-top: 20px;
+    row-gap: 24px;
+    
+}
+.gallery-item{
+    margin: 0 auto;
+}
+.gallery-image{
+    display: block;
+    width: 360px;
+    height: 200px;
+}
+/* .simple-lightbox{
+    background: rgba(46, 47, 66, 0.8);
+} */
