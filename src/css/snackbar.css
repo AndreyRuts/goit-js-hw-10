@@ -1,0 +1,55 @@
+.form{
+    display: block;
+    margin: 0 auto;
+    width: 360px;
+    margin-top: 20px;
+}
+
+.deleay-form-label{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.delay-input{
+    border: 1px solid #808080;
+    border-radius: 4px;
+    width: 353px;
+    height: 40px;
+}
+
+.form-fieldset{
+    margin: 0;
+    padding: 0;
+    margin-top: 16px;
+    border-radius: 4px;
+    stroke-width: 1px;
+    stroke: #808080;
+    height: 64px;
+    align-content: space-around;
+}
+
+.element{
+    text-align: left;
+    margin-left: 28px;
+}
+.form-label{
+    margin-right: 48px;
+    margin-left: 30px;
+}
+.form-btn{
+    margin-top: 24px;
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 360px;
+    height: 40px;
+    background: #4e75ff;
+    border: 0;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
