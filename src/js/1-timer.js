@@ -14,70 +14,48 @@ let timerId = null;
 startBtn.disabled = true;
 
 
-class Timer {
-  constructor({onTick}) {
-    this.isActive = false;
-    this.onTick = onTick;
-  }
+
+function start() {      
+  input.disabled = true;
+  startBtn.disabled = true;
   
-
-  start() {      
-    input.disabled = true;
-    startBtn.disabled = true;
-
-    // if (this.isActive) {
-    //   return;   
-    // }
-
-    // const startTime = Date.now();
-    // this.isActive = true;
+  timerId = setInterval(() => {        
+    const currentTime = Date.now();
+    const deltaTime = userSelectedDate - currentTime;  // проверить типы данных а то NaN...
     
-    setInterval(() => {        
-      const currentTime = Date.now();
-      const deltaTime = userSelectedDate - currentTime;
-      
-      
-      // const time = this.convertMs(deltaTime);
-      if (deltaTime <= 0) {
-        clearInterval(timerId);
-        alert("Countdown finished");
-      } else {
-        updateClockface(this.convertMs(deltaTime));
-        
-      }
+    if (deltaTime <= 0) {
+      clearInterval(timerId);
+      alert("Countdown finished");
+      return;
+    } 
+      updateClockface(convertMs(deltaTime));
+  }, 1000);   
 
-      this.onTick(time);
-    }, 1000);   
-
-  }
-
-  convertMs(ms) {   
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
-    const days = this.pad(Math.floor(ms / day));
-    const hours = this.pad(Math.floor((ms % day) / hour));
-    const minutes = this.pad(Math.floor(((ms % day) % hour) / minute));
-    const seconds = this.pad(Math.floor((((ms % day) % hour) % minute) / second));
-    return { days, hours, minutes, seconds };
-  }
-
-  pad(value) {
-    return String(value).padStart(2, "0");
-  }
 }
 
-const timer = new Timer({
-  onTick: updateClockface
-});
-startBtn.addEventListener("click", timer.start.bind(timer)); //timer.start.bind(timer)
+function convertMs(ms) {   
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+  const days = Math.floor(ms / day);
+  const hours = Math.floor((ms % day) / hour);
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  return { days, hours, minutes, seconds };
+}
+
+function addLeadingZero (value) {
+  return String(value).padStart(2, "0");
+}
+
+startBtn.addEventListener("click", start);
 
 function updateClockface({ days, hours, minutes, seconds }) {
-  day.textContent = `${days}`;
-  hour.textContent = `${hours}`;
-  minute.textContent = `${minutes}`;
-  second.textContent = `${seconds}`;
+  day.textContent = addLeadingZero(days);
+  hour.textContent = addLeadingZero(hours);
+  minute.textContent = addLeadingZero(minutes);
+  second.textContent = addLeadingZero(seconds);
 }
 
 const options = {
@@ -87,12 +65,12 @@ const options = {
   minuteIncrement: 1,
   
   onClose(selectedDates) {
-    if (selectedDates[0] < Date.now()) { //не поянял почему < канает в сравнении обьектов
+    if (selectedDates[0] < Date.now()) {
       window.alert("Please choose a date in the future");
       startBtn.disabled = true;
     } else {
       startBtn.disabled = false;
-      userSelectedDate = selectedDates;
+      userSelectedDate = selectedDates; // тут ошибка походу завтра проверить
     }
     console.log(selectedDates[0]);
   },
