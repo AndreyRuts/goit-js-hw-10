@@ -8,12 +8,10 @@ const day = document.querySelector("span[data-days]");
 const hour = document.querySelector("span[data-hours]");
 const minute = document.querySelector("span[data-minutes]");
 const second = document.querySelector("span[data-seconds]");
-const input = document.querySelector(".timer-input")
+const input = document.querySelector(".timer-input");
 let userSelectedDate = null;
 let timerId = null;
 startBtn.disabled = true;
-
-
 
 function start() {      
   input.disabled = true;
@@ -21,11 +19,14 @@ function start() {
   
   timerId = setInterval(() => {        
     const currentTime = Date.now();
-    const deltaTime = userSelectedDate - currentTime;  // проверить типы данных а то NaN...
-    
+    const deltaTime = userSelectedDate - currentTime; 
+
     if (deltaTime <= 0) {
       clearInterval(timerId);
-      alert("Countdown finished");
+      iziToast.success({
+        title: "OK",
+        message: "Countdown finished",
+      });    
       return;
     } 
       updateClockface(convertMs(deltaTime));
@@ -65,16 +66,18 @@ const options = {
   minuteIncrement: 1,
   
   onClose(selectedDates) {
-    if (selectedDates[0] < Date.now()) {
-      window.alert("Please choose a date in the future");
+    userSelectedDate = selectedDates[0];
+    if (userSelectedDate <= new Date()) {
+      iziToast.error({
+        error: "Error",
+        message: "Please choose a date in the future",
+      });
       startBtn.disabled = true;
     } else {
       startBtn.disabled = false;
-      userSelectedDate = selectedDates; // тут ошибка походу завтра проверить
     }
     console.log(selectedDates[0]);
   },
-  
 };
 
 flatpickr("#datetime-picker", options);

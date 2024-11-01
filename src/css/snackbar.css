@@ -15,8 +15,18 @@
 .delay-input{
     border: 1px solid #808080;
     border-radius: 4px;
-    width: 353px;
+    width: 338px;
     height: 40px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+    padding-left: 16px;
+}
+.delay-input:hover{
+    border: 1px solid #000;
 }
 
 .form-fieldset{
@@ -52,4 +62,7 @@
     line-height: 150%;
     letter-spacing: 0.04em;
     color: #fff;
+}
+.form-btn:hover{
+    background: #6c8cff;
 }

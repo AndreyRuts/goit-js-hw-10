@@ -1,10 +1,29 @@
 .timer-input {
   border: 1px solid #808080;
   border-radius: 4px;
-  width: 272px;
+  width: 250px;
   height: 40px;
   margin-top: 20px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #000;
+  padding-left: 16px;
+  outline: none;
 }
+.timer-input:hover{
+  border: 1px solid #000;
+}
+.timer-input:active {
+  border: 1px solid #4e75ff;
+}
+.timer-input:disabled {
+  border: 1px solid #808080;
+  color: #808080;
+}
+
 .timer-btn {
   border-radius: 8px;
   padding: 8px 16px;
@@ -19,10 +38,14 @@
   letter-spacing: 0.04em;
   color: #fff;
 }
+.timer-btn:hover {
+  background: #6c8cff;
+}
 .timer-btn:disabled {
   background: #cfcfcf;
   color: #989898;
 }
+
 .timer {
   width: 346px;
   height: 72px;
@@ -30,6 +53,7 @@
   gap: 24px;
   margin: 0 auto;
   margin-top: 24px;
+  justify-content: center;
 }
 .field {
   display: flex;
